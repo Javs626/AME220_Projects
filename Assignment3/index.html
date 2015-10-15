@@ -1,0 +1,162 @@
+<html>
+<head>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<title>
+  Image Resizer
+</title>
+<style>
+  body{
+     background-image: url("http://goo.gl/QwvgiZ");
+  }
+  #imagePreview{
+      height: 300px;
+      width: 300px;
+      display: block;
+  }
+  #buttons{
+    text-align:center;
+    width:200px;
+  }
+  .osbutton{
+    margin:-2px;
+    display:inline;
+  }
+  .sel{
+    width:200px;
+    margin-top:10px;
+  }
+  .wrapper{
+    margin: auto;
+    position:relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+  }
+</style>
+<script src="jquery-1.11.3.js" type="text/javascript"></script>
+
+<script>
+/*
+$( "#target" ).click(function() {
+  alert( "Handler for .click() called." );
+});
+*/
+function optionpopulate(){
+//  if(document.getElementById("apple").click()==true){
+    $("#apple").click(function(){
+    alert("you selected ios");
+    iosvalues = [1024,512,120,180,76,152,40,80,120,29,158,87];
+    var select = document.getElementById("sel");
+    for(var i = 0; i < iosvalues.length; i++){
+     select.options[select.options.length] = new Option("iOS Icon "+ iosvalues[i], iosvalues[i]);
+    }
+  });
+//  }
+  $("#andr").click(function(){
+   alert("you selected android");
+   androidvalues = [24,512,12,10,76,152,10,29,58,8];
+   var select = document.getElementById("sel");
+   for(var i = 0; i < androidvalues.length; i++){
+      select.options[select.options.length] = new Option("Android Icon "+ androidvalues[i], androidvalues[i]);
+ //  outS = outS + "<option id='Android'"+i "value="androidvalues[i]">"androidvalues[i]"</option>";
+    }
+  });
+}
+function imageUploaded()
+{
+   var file = $('#uploadImage').get(0);
+   if(file.files[0].type.split("/")[0].toLowerCase() != "image"){
+        alert("Incorrect file type -- Please ensure you are uploading an image file.");
+   }
+   if ( file.files && file.files[0] && file.files[0].type.split("/")[0].toLowerCase() === "image") {
+        var FR = new FileReader();
+        FR.onload = function(e) {
+            var data = e.target.result;
+            var canvas = document.createElement("canvas");
+            var img = document.createElement("img");
+/*
+var select = document.getElementById("sel");
+for(index in myobject) {
+    select.options[select.options.length] = new Option(myobject[index], index);
+}
+*/
+            img.onload= function(){
+
+
+                // var select= document.getElementById("sel");
+                // var selectvalue = e.options[e.selectedIndex].value;
+                 var e = document.getElementById("sel");
+                 var MAX_WIDTH = Number(e.options[e.selectedIndex].value);
+                 var MAX_HEIGHT =Number(e.options[e.selectedIndex].value);
+                 var width = img.width;
+                 var height = img.height;
+                 var w2 = width;
+                 var h2 = height;
+
+                 if (width > height) {
+                     if (width > MAX_WIDTH) {
+                        h2 = height * MAX_WIDTH / width;
+                        w2 = MAX_WIDTH;
+                    }
+                 } else {
+                     if (height > MAX_HEIGHT) {
+                        w2 = width * MAX_HEIGHT / height;
+                        h2 = MAX_HEIGHT;
+                    }
+                }
+                canvas.width = w2;
+                canvas.height = h2;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, w2, h2);
+
+                //document.body.appendChild(canvas);
+                var base64St = canvas.toDataURL("image/png");
+                document.getElementById("imagePreview").src = base64St;
+                document.getElementById("imagePreview").style.height = MAX_HEIGHT + "px";
+                document.getElementById("imagePreview").style.width= MAX_WIDTH + "px";
+            }
+            img.src = data;
+        };
+        FR.readAsDataURL( file.files[0] );
+   }
+}
+</script>
+
+</head>
+<h3>Upload Your Images Here</h3>
+<div class ="wrapper">
+  <div id='buttons'>
+    <button id='apple' type="button" class="btn btn-default osbutton " >iOS</button>
+    <button id='andr' type="button" class="btn btn-default osbutton ">Android</button>
+  </ul>
+<body onload="optionpopulate()">
+
+  <select id="sel"class="sel form-control" name = 'select' >
+
+<!--
+<option>select</option>
+  <option id='ios0' value="1024">1024</option>
+  <option id='ios1' value="512">512</option>
+  <option id='ios2' value="120">120</option>
+  <option id='ios3' value="180">180</option>
+  <option id='ios4' value="76">76</option>
+  <option id='ios5' value="152">152</option>
+  <option id='ios6' value="40">40</option>
+  <option id='ios7' value="80">80</option>
+  <option id='ios8' value="120">120</option>
+  <option id='ios9' value="29">29</option>
+  <option id='ios10' value="58">158</option>
+  <option id='ios11' value="87">87</option>
+  -->
+  </select>
+  <input type="file" name="uploadImage" id="uploadImage" onchange="imageUploaded()">
+  <img id="imagePreview">
+
+</div>
+
+</body>
+
+
+</html>
