@@ -36,7 +36,6 @@
     margin: auto;
     width: 25%;
     padding: 10px;
-
   }
   .nav li{
     display: inline;
@@ -60,16 +59,12 @@
   }
   .footer{
     background-color: black;
-
-
   }
 </style>
 <script src="jquery-1.11.3.js" type="text/javascript"></script>
-
 <script>
 
 function optionpopulate(){
-
     $("#apple").click(function(){
     $("#sel").empty();
     iosvalues = [1024,512,120,180,76,152,40,80,120,29,158,87,57,114,72,144,58,50,100];
@@ -105,9 +100,10 @@ function imageUploaded()
             var img = document.createElement("img");
             img.onload= function(){
 
-                 var e = document.getElementById("sel");
-                 var MAX_WIDTH = Number(e.options[e.selectedIndex].value);
-                 var MAX_HEIGHT =Number(e.options[e.selectedIndex].value);
+                 var selection = document.getElementById("sel");
+
+                 var MAX_WIDTH = Number(selection.options[selection.selectedIndex].value);
+                 var MAX_HEIGHT =Number(selection.options[selection.selectedIndex].value);
                  var width = img.width;
                  var height = img.height;
                  var w2 = width;
@@ -128,8 +124,6 @@ function imageUploaded()
                 canvas.height = h2;
                 var ctx = canvas.getContext("2d");
                 ctx.drawImage(img, 0, 0, w2, h2);
-
-
                 var base64St = canvas.toDataURL("image/png");
                 document.getElementById("imagePreview").src = base64St;
                 document.getElementById("imagePreview").style.height = MAX_HEIGHT + "px";
@@ -163,21 +157,16 @@ function imageUploaded()
             <p>...and the best part...it's free!</p>
           </div>
         </div>
-
 <div class ="wrapper">
   <h3>Upload Your Images Here</h3>
   <div id='buttons'>
     <button id='apple' type="button" class="btn btn-default osbutton " >iOS</button>
     <button id='andr' type="button" class="btn btn-default osbutton ">Android</button>
   </ul>
-  <select id="sel"class="sel form-control" name = 'select' >
+  <select id="sel"class="sel form-control" name = 'select' onchange="imageUploaded()">
   </select>
   <input type="file" name="uploadImage" id="uploadImage" onchange="imageUploaded()">
   <img id="imagePreview">
 </div>
-
-
 </body>
-
-
 </html>
