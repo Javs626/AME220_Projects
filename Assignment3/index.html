@@ -64,10 +64,11 @@
 <script src="jquery-1.11.3.js" type="text/javascript"></script>
 <script>
 
-function optionpopulate(){
+function optionpopulate(){//populates the select drop-down menu with options
+
     $("#apple").click(function(){
     $("#sel").empty();
-    iosvalues = [1024,512,120,180,76,152,40,80,120,29,158,87,57,114,72,144,58,50,100];
+    iosvalues = [1024,512,120,180,76,152,40,80,29,158,87,57,114,72,144,58,50,100];
     iosvalues=iosvalues.sort(function(a, b){return a-b});
     var select = document.getElementById("sel");
     for(var i = 0; i < iosvalues.length; i++){
@@ -75,10 +76,12 @@ function optionpopulate(){
     }
   });
 
-   $("#andr").click(function(){
-   $("#sel").empty();
+   $("#andr").click(function(){//click event handler if the "android" button is clicked
+   $("#sel").empty();//the select element list of options list is initialized as empty
+   //array of android values are created and sorted
    androidvalues = [48,72,96,144,192,512,24,36,16,32,64,22,33,44,66,88];
    androidvalues=androidvalues.sort(function(a, b){return a-b});
+   //options are created within the select element for each value in the array
    var select = document.getElementById("sel");
    for(var i = 0; i < androidvalues.length; i++){
       select.options[select.options.length] = new Option("Icon-"+ androidvalues[i]+".png", androidvalues[i]);
@@ -99,10 +102,9 @@ function imageUploaded()
             var canvas = document.createElement("canvas");
             var img = document.createElement("img");
             img.onload= function(){
-
                  var selection = document.getElementById("sel");
-
                  var MAX_WIDTH = Number(selection.options[selection.selectedIndex].value);
+                 //makes the image res according to what was selected in the drop-down menu
                  var MAX_HEIGHT =Number(selection.options[selection.selectedIndex].value);
                  var width = img.width;
                  var height = img.height;
