@@ -1,7 +1,5 @@
 <html>
 <head>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
 <style>
 #addNew
 {
@@ -22,6 +20,8 @@
     margin: auto;
     border: 1px solid black;
     border-radius: 150px;
+    background-size: 100% 100%; /* http://beachgrooves.com/wp-content/uploads/2014/07/beach.jpg*/
+    background-repeat: no-repeat;/* http://i.telegraph.co.uk/multimedia/archive/02692/wentworthForest_2692456k.jpg*/
   }
   #digitalWrapper{
     display: none;
@@ -37,7 +37,7 @@
     font-size: 75px;
     font-family: sans-serif;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 30px;
   }
   .nums
   {
@@ -209,6 +209,73 @@ function toggle(){
         div.style.display = 'none';
     }
 };
+function needleSelect(){
+  var selection = document.getElementById('needleSelect');
+  var styleIndex = selection.options[selection.selectedIndex].value;
+  var hR = document.getElementById('hr');
+  var mN = document.getElementById('minute');
+  var sC = document.getElementById('sec');
+  if (styleIndex == 'thick') {
+    hR.style.height = '25px';
+    mN.style.height = '25px';
+    sC.style.height = '25px';
+  }else{
+    hR.style.height = '2px';
+    mN.style.height = '2px';
+    sC.style.height = '1px';
+  }
+};
+function backgroundSelect(){
+  var selection = document.getElementById("bkg");
+  var bkgIndex = selection.options[selection.selectedIndex].value;
+  var bkg = document.getElementById('clockWrapper');
+  if(bkgIndex == 'desert'){
+    bkg.style.background = 'url(http://7-themes.com/data_images/out/8/6794041-free-sahara-desert-wallpaper.jpg)'
+    bkg.style['background-size']= '100% 100%';
+    bkg.style['background-repeat']= 'no-repeat';
+  }
+  else if (bkgIndex == 'forest') {
+    bkg.style.background = 'url(http://i.telegraph.co.uk/multimedia/archive/02692/wentworthForest_2692456k.jpg)'
+    bkg.style['background-size']= '100% 100%';
+    bkg.style['background-repeat']= 'no-repeat';
+  }
+  else if (bkgIndex == 'beach') {
+    bkg.style.background = 'url(http://beachgrooves.com/wp-content/uploads/2014/07/beach.jpg)'
+    bkg.style['background-size']= '100% 100%';
+    bkg.style['background-repeat']= 'no-repeat';
+  }
+}
+function colorChange(){
+  var selection = document.getElementById('colors');
+  var selIndex =selection.options[selection.selectedIndex].value;
+    var div = document.getElementById('clockWrapper');
+    var digiDiv = document.getElementById('digitalWrapper');
+    if(selIndex == 'default'){
+      div.style.background = 'white';
+      digiDiv.style.background = 'white';
+    }
+    else if (selIndex == 'red') {
+      div.style.background = 'red';
+      digiDiv.style.background = 'red';
+    }
+    else if (selIndex == 'blue') {
+      div.style.background = 'blue';
+
+      digiDiv.style.background = 'blue';
+    }
+    else if (selIndex == 'green') {
+      div.style.background = 'green';
+      digiDiv.style.background = 'green';
+    }
+    else if (selIndex == 'purple') {
+      div.style.background = 'purple';
+      digiDiv.style.background = 'purple';
+    }
+    else if (selIndex == 'orange') {
+      div.style.background = 'orange';
+      digiDiv.style.background = 'orange';
+    }
+};
 </script>
 </head>
 
@@ -227,9 +294,9 @@ function toggle(){
     <div class='nums' id='n11'> - </div>
     <div class='nums' id='n12'> = </div>
 
-    <div class='needle' id='hour'></span> <span> </div>
-    <div  class='needle' id='min'><span> </span> </div>
-    <div  class='needle' id='secs'><span> </span></div>
+    <div class='needle' id='hour'><span id='minute'> </span> </div>
+    <div  class='needle' id='min'><span id='hr'> </span> </div>
+    <div  class='needle' id='secs'><span id='sec'> </span></div>
   </div>
   <div id='digitalWrapper'>
     <div id='txt'></div>
@@ -238,7 +305,26 @@ function toggle(){
   <div id='placeList'> </div>
 
     <button id='button' onclick="toggle()">Analog/Digital Toggle</button>
-
+    <select id='colors' onchange="colorChange()">
+        <option >Please Select A Background Color</option>
+        <option value='default'>Default</option>
+        <option value='red'>Red</option>
+        <option value='blue'>Blue</option>
+        <option value='green'>Green</option>
+        <option value='purple'>Purple</option>
+        <option value='orange'>Orange</option>
+    </select>
+    <select id='needleSelect' onchange="needleSelect()">
+      <option>Please Select Needle Style</option>
+      <option value='default'>Default</option>
+      <option value='thick'>Thick</option>
+    </select>
+    <select id='bkg' onchange='backgroundSelect()'>
+      <option>Please Select A Background</option>
+      <option value='desert'>Desert</option>
+      <option value='forest'>Forest</option>
+      <option value='beach'>Beach</option>
+    </select>
   <div id="addNew">
       <select id='timeZones'>
         <option value='-12:00'> US minor islands (-12:00) </option>
