@@ -1,7 +1,9 @@
-function updateClock(date)
+var globalClock =setInterval("updateClock(null,0)", 1000);
+function updateClock(date,offset)
 {
   date = date || new Date();
-  var h = date.getHours() % 12;
+  var ofst = offset;
+  var h = (date.getHours() % 12)-ofst;
   var m = date.getMinutes();
   var s = date.getSeconds();
   var hdeg = (h - 3)*30;
@@ -12,10 +14,11 @@ function updateClock(date)
   document.getElementById("secs").style.transform = "rotate(" + sdeg + "deg)";
 }
 
+
 function startUp()
 {
   generateMyTimeZoneList();
-  setInterval("updateClock(null)", 1000);
+//  setInterval("updateClock(null,0)", 1000);
   setInterval('digiTime()',1000);
 }
 function digiTime() {
@@ -180,22 +183,21 @@ var selIndex =selection.options[selection.selectedIndex].value;
   }
 };
 function addTimeZone(){
-var today = new Date();
 var selection = document.getElementById('timeZones');
 var selIndex =selection.options[selection.selectedIndex].value;
-if(selIndex =='-12:00'){
-  
+clearInterval(globalClock);
+if(selIndex == '-12:00'){
+  globalClock = setInterval("updateClock(null,2)", 1000);
 }
-else if (selIndex == '-11:00') {
-
+else if (selIndex =='-11:00' ) {
+  globalClock = setInterval("updateClock(null,3)", 1000);
 }
 else if (selIndex == '-10:00') {
-
+  globalClock = setInterval("updateClock(null,3)", 1000);
 }
-else if (selIndex == '-09:30' ) {
-
+else if(selIndex == '-09:30'){
+  globalClock = setInterval("updateClock(null,3)", 1000);
 }
-
 }
 function animationHover(element, animation){
     element = $(element);
