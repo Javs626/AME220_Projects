@@ -1,4 +1,5 @@
 var globalClock =setInterval("updateClock(null,0)", 1000);
+var globalDigital =setInterval('digiTime(0)',1000);
 function updateClock(date,offset)
 {
   date = date || new Date();
@@ -18,12 +19,11 @@ function updateClock(date,offset)
 function startUp()
 {
   generateMyTimeZoneList();
-//  setInterval("updateClock(null,0)", 1000);
-  setInterval('digiTime()',1000);
 }
-function digiTime() {
+function digiTime(offset) {
+    var ofst = offset;
     var today = new Date();
-    var h = today.getHours() % 12;
+    var h = today.getHours()-ofst;
     var m = today.getMinutes();
     var s = today.getSeconds();
     m = checkTime(m);
@@ -74,7 +74,10 @@ function generateMyTimeZoneList(){
 function TZSelected(a)
 {
   if(a == -1){
-    updateClock(null);
+    clearInterval(globalClock);
+    clearInterval(globalDigital);
+    globalClock =setInterval("updateClock(null,0)", 1000);
+    globalDigital =setInterval("digiTime(0)", 1000);
   }
 }
 var myTimeZones = [];
@@ -186,17 +189,25 @@ function addTimeZone(){
 var selection = document.getElementById('timeZones');
 var selIndex =selection.options[selection.selectedIndex].value;
 clearInterval(globalClock);
+clearInterval(globalDigital);
 if(selIndex == '-12:00'){
-  globalClock = setInterval("updateClock(null,2)", 1000);
+  globalClock = setInterval("updateClock(null,5)", 1000);
+  globalDigital =setInterval('digiTime(5)',1000);
 }
 else if (selIndex =='-11:00' ) {
   globalClock = setInterval("updateClock(null,3)", 1000);
+  globalDigital =setInterval('digiTime(3)',1000);
+
 }
 else if (selIndex == '-10:00') {
-  globalClock = setInterval("updateClock(null,3)", 1000);
+  globalClock = setInterval("updateClock(null,4)", 1000);
+  globalDigital =setInterval('digiTime(4)',1000);
+
 }
 else if(selIndex == '-09:30'){
   globalClock = setInterval("updateClock(null,3)", 1000);
+  globalDigital =setInterval('digiTime(3)',1000);
+
 }
 }
 function animationHover(element, animation){
