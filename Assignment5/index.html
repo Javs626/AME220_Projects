@@ -1,286 +1,11 @@
 <html>
 <head>
-<style>
-#addNew
-{
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    margin-top: 1000px;
-    top: 0px;
-    background: rgba(0,0,0,.7);
-    transition: 1s;
-}
-
-  #clockWrapper{
-    display: block;
-    width: 300px;
-    height: 300px;
-    margin: auto;
-    border: 1px solid black;
-    border-radius: 150px;
-    background-size: 100% 100%; /* http://beachgrooves.com/wp-content/uploads/2014/07/beach.jpg*/
-    background-repeat: no-repeat;/* http://i.telegraph.co.uk/multimedia/archive/02692/wentworthForest_2692456k.jpg*/
-  }
-  #digitalWrapper{
-    display: none;
-    width: 300px;
-    height: 150px;
-    margin:auto;
-    position: relative;
-    border: 5px solid black;
-    border-radius: 40px;
-  }
-
-  #txt{
-    font-size: 75px;
-    font-family: sans-serif;
-    text-align: center;
-    margin-top: 30px;
-  }
-  .nums
-  {
-    position: absolute;
-    top: 150px;
-    width: 290px;
-    text-align: right;
-  }
-  #n1{
-    transform: rotate(-60deg);
-  }
-  #n2{
-    transform: rotate(-30deg);
-  }
-  #n3{
-    transform: rotate(0deg);
-  }
-  #n4{
-    transform: rotate(30deg);
-  }
-  #n5{
-    transform: rotate(60deg);
-  }
-  #n6{
-    transform: rotate(90deg);
-  }
-  #n7{
-    transform: rotate(120deg);
-  }
-  #n8{
-    transform: rotate(150deg);
-  }
-  #n9{
-    transform: rotate(180deg);
-  }
-  #n10{
-    transform: rotate(210deg);
-  }
-  #n11{
-    transform: rotate(240deg);
-  }
-  #n12{
-    transform: rotate(270deg);
-  }
-  .needle
-  {
-     margin-top: 150px;
-     position: absolute;
-     width: 300px;
-     line-height: 0px;
-  }
-  .needle span
-  {
-      display: block;
-      width: auto;
-      margin-left: 140px;
-     text-align: left;
-  }
-  #hour span{
-    background-color: red;
-    max-width: 100px;
-    height: 2px;
-  }
-  #min span{
-    background-color: blue;
-    max-width: 120px;
-    height: 2px;
-  }
-  #secs span{
-    background-color: black;
-    max-width: 135px;
-    height: 1px;
-  }
-</style>
-
-<script>
-  function updateClock(date)
-  {
-    date = date || new Date();
-    var h = date.getHours() % 12;
-    var m = date.getMinutes();
-    var s = date.getSeconds();
-    var hdeg = (h - 3)*30;
-    var mdeg = (m - 15)*6;
-    var sdeg = (s - 15)*6;
-    document.getElementById("hour").style.transform = "rotate(" + hdeg + "deg)";
-    document.getElementById("min").style.transform = "rotate(" + mdeg + "deg)";
-    document.getElementById("secs").style.transform = "rotate(" + sdeg + "deg)";
-  }
-
-  function startUp()
-  {
-    generateMyTimeZoneList();
-    setInterval("updateClock(null)", 1000);
-    setInterval('digiTime()',1000);
-  }
-  function digiTime() {
-      var today = new Date();
-      var h = today.getHours();
-      var m = today.getMinutes();
-      var s = today.getSeconds();
-      m = checkTime(m);
-      s = checkTime(s);
-      document.getElementById('txt').innerHTML =
-      h + ":" + m + ":" + s;
-    //  var t = setTimeout(startTime, 500);
-  }
-  function checkTime(i) {
-      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-      return i;
-  }
-
-  function cancelTimeZone()
-  {
-    document.getElementById("addNew").style.marginTop = "1000px";
-    setTimeout(addNewTZ_Aux1, 1000);
-  }
-
-  function addNewTZ()
-  {
-    document.getElementById("addNew").style.display = "block";
-    setTimeout(addNewTZ_Aux, 0);
-  }
-
-  function addNewTZ_Aux(){
-    document.getElementById("addNew").style.marginTop = "0px";
-  }
-
-  function addNewTZ_Aux1(){
-    document.getElementById("addNew").style.display = "none";
-  }
-
-  function generateMyTimeZoneList(){
-    var outS = "";
-
-    outS += "<a href='javascript:TZSelected(-1)'> Current Location </a><br>";
-
-    // generate markup
-
-    outS += "<a href='javascript:addNewTZ()'>+ New </a>";
-
-
-    document.getElementById("placeList").innerHTML = outS;
-
-  }
-
-  function TZSelected(a)
-  {
-    if(a == -1){
-      updateClock(null);
-    }
-  }
-var myTimeZones = [];
-
-//var button = document.getElementById("button");
-function toggle(){
-    var div = document.getElementById('clockWrapper');
-    if (div.style.display !== 'none') {
-        div.style.display = 'none';
-    }
-    else {
-        div.style.display = 'block';
-    }
-    var div = document.getElementById('digitalWrapper');
-    if (div.style.display !== 'block') {
-        div.style.display = 'block';
-    }
-    else {
-        div.style.display = 'none';
-    }
-};
-function needleSelect(){
-  var selection = document.getElementById('needleSelect');
-  var styleIndex = selection.options[selection.selectedIndex].value;
-  var hR = document.getElementById('hr');
-  var mN = document.getElementById('minute');
-  var sC = document.getElementById('sec');
-  if (styleIndex == 'thick') {
-    hR.style.height = '25px';
-    mN.style.height = '25px';
-    sC.style.height = '25px';
-  }else{
-    hR.style.height = '2px';
-    mN.style.height = '2px';
-    sC.style.height = '1px';
-  }
-};
-function backgroundSelect(){
-  var selection = document.getElementById("bkg");
-  var bkgIndex = selection.options[selection.selectedIndex].value;
-  var bkg = document.getElementById('clockWrapper');
-  if(bkgIndex == 'desert'){
-    bkg.style.background = 'url(http://7-themes.com/data_images/out/8/6794041-free-sahara-desert-wallpaper.jpg)'
-    bkg.style['background-size']= '100% 100%';
-    bkg.style['background-repeat']= 'no-repeat';
-  }
-  else if (bkgIndex == 'forest') {
-    bkg.style.background = 'url(http://i.telegraph.co.uk/multimedia/archive/02692/wentworthForest_2692456k.jpg)'
-    bkg.style['background-size']= '100% 100%';
-    bkg.style['background-repeat']= 'no-repeat';
-  }
-  else if (bkgIndex == 'beach') {
-    bkg.style.background = 'url(http://beachgrooves.com/wp-content/uploads/2014/07/beach.jpg)'
-    bkg.style['background-size']= '100% 100%';
-    bkg.style['background-repeat']= 'no-repeat';
-  }
-}
-function colorChange(){
-  var selection = document.getElementById('colors');
-  var selIndex =selection.options[selection.selectedIndex].value;
-    var div = document.getElementById('clockWrapper');
-    var digiDiv = document.getElementById('digitalWrapper');
-    if(selIndex == 'default'){
-      div.style.background = 'white';
-      digiDiv.style.background = 'white';
-    }
-    else if (selIndex == 'red') {
-      div.style.background = 'red';
-      digiDiv.style.background = 'red';
-    }
-    else if (selIndex == 'blue') {
-      div.style.background = 'blue';
-
-      digiDiv.style.background = 'blue';
-    }
-    else if (selIndex == 'green') {
-      div.style.background = 'green';
-      digiDiv.style.background = 'green';
-    }
-    else if (selIndex == 'purple') {
-      div.style.background = 'purple';
-      digiDiv.style.background = 'purple';
-    }
-    else if (selIndex == 'orange') {
-      div.style.background = 'orange';
-      digiDiv.style.background = 'orange';
-    }
-};
-</script>
+<link href='animate.css' type='text/css' rel='stylesheet'>
+<link href='custom.css' type='text/css' rel='stylesheet'>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
-
 <body onload='startUp()'>
-  <div id='clockWrapper'>
+  <div id='clockWrapper' class="animated bounce">
     <div class='nums' id='n1'> - </div>
     <div class='nums' id='n2'> - </div>
     <div class='nums' id='n3'> = </div>
@@ -298,14 +23,16 @@ function colorChange(){
     <div  class='needle' id='min'><span id='hr'> </span> </div>
     <div  class='needle' id='secs'><span id='sec'> </span></div>
   </div>
-  <div id='digitalWrapper'>
+  <div id='digitalWrapper' class="animated bounce">
     <div id='txt'></div>
   </div>
 
   <div id='placeList'> </div>
 
-    <button id='button' onclick="toggle()">Analog/Digital Toggle</button>
-    <select id='colors' onchange="colorChange()">
+    <button id='button' onclick="toggle()" class="btn btn-default">Analog/Digital Toggle</button>
+
+<div id='themes'>
+    <select id='colors' onchange="colorChange()" class="form-control">
         <option >Please Select A Background Color</option>
         <option value='default'>Default</option>
         <option value='red'>Red</option>
@@ -314,18 +41,21 @@ function colorChange(){
         <option value='purple'>Purple</option>
         <option value='orange'>Orange</option>
     </select>
-    <select id='needleSelect' onchange="needleSelect()">
+    <select id='needleSelect' onchange="needleSelect()" class="form-control">
       <option>Please Select Needle Style</option>
       <option value='default'>Default</option>
       <option value='thick'>Thick</option>
+      <option value='black'>Black</option>
     </select>
-    <select id='bkg' onchange='backgroundSelect()'>
+    <select id='bkg' onchange='backgroundSelect()' class="form-control">
       <option>Please Select A Background</option>
       <option value='desert'>Desert</option>
       <option value='forest'>Forest</option>
       <option value='beach'>Beach</option>
     </select>
-  <div id="addNew">
+
+</div>
+  <div id="addNew" >
       <select id='timeZones'>
         <option value='-12:00'> US minor islands (-12:00) </option>
         <option value='-11:00'> Hawaii (-11:00) </option>
@@ -336,5 +66,6 @@ function colorChange(){
       <a href='javascript:cancelTimeZone()'> Cancel </a>
   </div>
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src='custom.js'></script>
 </html>
