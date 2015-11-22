@@ -5,7 +5,7 @@
 <link href='custom.css' type='text/css' rel='stylesheet'>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
-<body onload='startUp()'>
+<body id='htmlBody' onload='startUp()'>
   <h2 id='title'>Simple Clock</h2>
   <div id='clockWrapper' class="animated bounce">
     <div class='nums' id='n1'> - </div>
@@ -32,6 +32,7 @@
   <div id='placeList'> </div>
 
     <button id='button' onclick="toggle()" class="btn btn-default">Analog/Digital Toggle</button>
+    <button id="lights" onclick="lightsOut()" class="btn btn-default">Turn Down Lights</button>
 
 <div id='themes'>
     <select id='colors' onchange="colorChange()" class="form-control">

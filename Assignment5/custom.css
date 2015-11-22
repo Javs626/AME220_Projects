@@ -5,6 +5,9 @@
 body{
    background-image: url("http://goo.gl/QwvgiZ");
 }
+body #htmlBody{
+  background-color: inherit;
+}
 #title{
   text-align: center;
   font-family: sans-serif;
@@ -20,7 +23,6 @@ body{
     background: rgba(0,0,0,.7);
     transition: 1s;
 }
-
   #clockWrapper{
     display: block;
     width: 300px;
@@ -54,6 +56,9 @@ body{
     width: 290px;
     text-align: right;
     font-weight: bolder;
+  }
+  #lights{
+    display:none;
   }
   #n1{
     transform: rotate(-60deg);

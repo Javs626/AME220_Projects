@@ -94,12 +94,21 @@ function toggle(){
   else {
       div.style.display = 'block';
   }
+
   var div = document.getElementById('digitalWrapper');
   if (div.style.display !== 'block') {
       div.style.display = 'block';
   }
   else {
       div.style.display = 'none';
+  }
+
+  var lightButton = document.getElementById('lights');
+  if (lightButton.style.display !== 'block') {
+      lightButton.style.display = 'block';
+  }
+  else {
+      lightButton.style.display = 'none';
   }
 };
 function needleSelect(){
@@ -231,3 +240,30 @@ $(document).ready(function(){
         animationHover(this, 'shake');
     });
 });
+
+function lightsOut(){
+  var digiBorder = document.getElementById('digitalWrapper');
+  var appTitle = document.getElementById('title');
+  var clockFont = document.getElementById('txt');
+  var backgroundColor = document.getElementById('htmlBody');
+  if(backgroundColor.style.background !='black'){
+
+    backgroundColor.style.background='black';
+    clockFont.style.color='red';
+    clockFont.style['text-shadow']='2px 2px 10px #FF0000';
+    appTitle.style.color='red';
+    appTitle.style['text-shadow']='2px 2px 10px #FF0000';
+    digiBorder.style.borderColor = "red";
+    digiBorder.style['box-shadow']='0 0 3px #FF0000';
+  }else{
+    backgroundColor.style.backgroundImage ='url("http://goo.gl/QwvgiZ")';
+
+    clockFont.style.color='black';
+    clockFont.style['text-shadow']='';
+    appTitle.style.color='black';
+    appTitle.style['text-shadow']='';
+    digiBorder.style.borderColor = "black";
+    digiBorder.style['box-shadow']='';
+  }
+
+};
