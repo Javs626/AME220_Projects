@@ -1,5 +1,13 @@
+@font-face {
+    font-family: digitalWatchFont;
+    src: url(digital-7.ttf);
+}
 body{
    background-image: url("http://goo.gl/QwvgiZ");
+}
+#title{
+  text-align: center;
+  font-family: sans-serif;
 }
 #addNew
 {
@@ -35,9 +43,9 @@ body{
 
   #txt{
     font-size: 75px;
-    font-family: sans-serif;
+    font-family:digitalWatchFont, sans-serif;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 14px;
   }
   .nums
   {
@@ -45,6 +53,7 @@ body{
     top: 140px;
     width: 290px;
     text-align: right;
+    font-weight: bolder;
   }
   #n1{
     transform: rotate(-60deg);

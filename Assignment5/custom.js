@@ -24,6 +24,9 @@ function digiTime(offset) {
     var ofst = offset;
     var today = new Date();
     var h = today.getHours()-ofst;
+    if(h > 12){
+      h = (today.getHours() - 12)-ofst;
+    }
     var m = today.getMinutes();
     var s = today.getSeconds();
     m = checkTime(m);
