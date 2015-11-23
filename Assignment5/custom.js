@@ -27,6 +27,9 @@ function digiTime(offset) {
     if(h > 12){
       h = (today.getHours() - 12)-ofst;
     }
+    else if (h == 0) {
+      h = 12;
+    }
     var m = today.getMinutes();
     var s = today.getSeconds();
     m = checkTime(m);
@@ -237,7 +240,7 @@ function animationHover(element, animation){
 }
 $(document).ready(function(){
     $('#button').each(function() {
-        animationHover(this, 'shake');
+        animationHover(this, 'tada');
     });
 });
 
@@ -247,7 +250,7 @@ function lightsOut(){
   var clockFont = document.getElementById('txt');
   var backgroundColor = document.getElementById('htmlBody');
   if(backgroundColor.style.background !='black'){
-
+    backgroundColor.style['transition'] = '1s';
     backgroundColor.style.background='black';
     clockFont.style.color='red';
     clockFont.style['text-shadow']='2px 2px 10px #FF0000';
@@ -257,7 +260,6 @@ function lightsOut(){
     digiBorder.style['box-shadow']='0 0 3px #FF0000';
   }else{
     backgroundColor.style.backgroundImage ='url("http://goo.gl/QwvgiZ")';
-
     clockFont.style.color='black';
     clockFont.style['text-shadow']='';
     appTitle.style.color='black';
@@ -265,5 +267,18 @@ function lightsOut(){
     digiBorder.style.borderColor = "black";
     digiBorder.style['box-shadow']='';
   }
-
+};
+function customize(){
+  document.getElementById("customClock").style.display = "block";
+  setTimeout(custAux, 0);
+};
+function custAux(){
+  document.getElementById("customClock").style.marginTop = "0px";
+};
+function customizeCancel(){
+  document.getElementById("customClock").style.marginTop = "1000px";
+  setTimeout(custAuxCancel, 1000);
+};
+function custAuxCancel(){
+  document.getElementById("customClock").style.display = "none";
 };

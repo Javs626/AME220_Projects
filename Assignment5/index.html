@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body id='htmlBody' onload='startUp()'>
-  <h2 id='title'>Simple Clock</h2>
+  <h1 id='title'>Simple Clock</h1>
   <div id='clockWrapper' class="animated bounce">
     <div class='nums' id='n1'> - </div>
     <div class='nums' id='n2'> - </div>
@@ -32,9 +32,11 @@
   <div id='placeList'> </div>
 
     <button id='button' onclick="toggle()" class="btn btn-default">Analog/Digital Toggle</button>
-    <button id="lights" onclick="lightsOut()" class="btn btn-default">Turn Down Lights</button>
+    <button id='button2' onclick="customize()" class="btn btn-default">Customize</button>
+    <button id="lights" onclick="lightsOut()" class="btn btn-default">Light Switch</button>
 
-<div id='themes'>
+<div id='customClock'>
+  <button onclick="customizeCancel()" class="btn btn-default">Done</button>
     <select id='colors' onchange="colorChange()" class="form-control">
         <option >Please Select A Background Color</option>
         <option value='default'>Default</option>
@@ -56,7 +58,6 @@
       <option value='forest'>Forest</option>
       <option value='beach'>Beach</option>
     </select>
-
 </div>
   <div id="addNew">
       <select id='timeZones'>
