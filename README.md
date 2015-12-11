@@ -4,4 +4,4 @@
 - Assignment 3: iOS/Android icon generator webapp/website.
 - Assignment 4: Image Resize, Crop, Move, Export
 - Assignment 5: Javascript/CSS Clock
-- Assignment 6: Portfolio Website
+- Assignment 6: [Portfolio Website](http://javs626.github.io/AME220_Projects/)
